@@ -1,8 +1,14 @@
 import React from "react";
 
-function PizzaForm() {
+function PizzaForm({ form, setForm, handleSubmit }) {
+  function handleChange(e) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  }
   return (
-    <form onSubmit={null /*handle that submit*/}>
+    <form onSubmit={ handleSubmit }>
       <div className="form-row">
         <div className="col-5">
           <input
@@ -10,16 +16,18 @@ function PizzaForm() {
             type="text"
             name="topping"
             placeholder="Pizza Topping"
+            value={ form.topping }
+            onChange={ handleChange }
           />
         </div>
         <div className="col">
-          <select className="form-control" name="size">
+          <select className="form-control" name="size" value={ form.size } onChange={ handleChange }>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
           </select>
         </div>
-        <div className="col">
+        <div className="col" value={ form.vegetarian } onChange={ handleChange } >
           <div className="form-check">
             <input
               className="form-check-input"
